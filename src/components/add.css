@@ -1,0 +1,8 @@
+input, button, select {
+    display: block;
+    margin: 10px;
+}
+
+.title {
+    text-decoration: underline;
+}
