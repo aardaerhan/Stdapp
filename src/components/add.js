@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./add.css";
+import {Form, Button, Table} from 'react-bootstrap';
+
 
 function Add() {
     const [name, setName] = useState("");
@@ -32,9 +34,6 @@ function Add() {
         setFavLesson(e.target.value)
     }
 
-    const handleList = () => {
-        
-    }
 
     const add = () => {
         setData([...data, { name, surname, stdNum, level, favLesson }]);
@@ -43,68 +42,79 @@ function Add() {
     useEffect(() => {localStorage.setItem("info", JSON.stringify(data))},[data]);
 
     return (
-        <div className="Add">
-            <input
-                type="text"
-                placeholder="İsim"
-                value={name}
-                onChange={handleName}
-            />
-            <input
-                type="text"
-                placeholder="Soyisim"
-                value={surname}
-                onChange={handleSurname}
-            />
-            <input
-                type="number"
-                placeholder="Öğrenci Numarası"
-                value={stdNum}
-                onChange={handleStdNum}
-            />
-            <input
-                type="text"
-                placeholder="Öğrenci Sınıfı"
-                value={level}
-                onChange={handleLevel}
-            />
-            <input
-                type="text"
-                placeholder="Favori Dersi"
-                value={favLesson}
-                onChange={handleFavLesson}
-            />
 
-            <button onClick={add}>Ekle</button>
+        <div className="Add">
+            <Form>
+                <Form.Group className="mb-3">
+                    <Form.Label>İsim</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Öğrencinin İsmini Giriniz"
+                        value={name}
+                        onChange={handleName}
+                    />
+                    <Form.Label>Soyisim</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Öğrencinin Soyismini Giriniz"
+                        value={surname}
+                        onChange={handleSurname}
+                    />
+                    <Form.Label>Öğrenci Numarası</Form.Label>
+                    <Form.Control
+                        type="number"
+                        placeholder="Öğrencinin Numarasını Giriniz"
+                        value={stdNum}
+                        onChange={handleStdNum}
+                    />
+                    <Form.Label>Öğrenci Sınıfı</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Öğrencinin Sınıfını Giriniz"
+                        value={level}
+                        onChange={handleLevel}
+                    />
+                    <Form.Label>Favori Ders</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Öğrencinin Favori Dersini Giriniz"
+                        value={favLesson}
+                        onChange={handleFavLesson}
+                    />
+                </Form.Group>
+                <Button variant="primary" onClick={add} className="add_btn">
+                    Öğrenci Bilgilerini Ekle
+                </Button>
+            </Form>
             
-            <button onClick={() => setShowData(true)}>Listele</button>
-            {showData && data.map((item) => {
+            <Button className="list_btn" onClick={() => setShowData(true)}>Öğrenci Bilgilerini Listele</Button>
+            
+            <Table>
+            <thead>
+                <tr>
+                    <td className="title">İsim</td>
+                    <td className="title">Soyisim</td>
+                    <td className="title">Öğrenci Numarası</td>
+                    <td className="title">Öğrenci Sınıfı</td>
+                    <td className="title">Favori Dersi</td>
+                </tr>
+            </thead>
+            <tbody>
+                {showData && data.map((item) => {
                 return (
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td className="title">İsim</td>
-                                    <td className="title">Soyisim</td>
-                                    <td className="title">Öğrenci Numarası</td>
-                                    <td className="title">Öğrenci Sınıfı</td>
-                                    <td className="title">Favori Dersi</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
+
+                            
+                                <tr className={item.stdNum}>
                                     <td>{item.name}</td>
                                     <td>{item.surname}</td>
                                     <td>{item.stdNum}</td>
                                     <td>{item.level}</td>
                                     <td>{item.favLesson}</td>
                                 </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
                 )
             })}
+            </tbody>
+            </Table>
         </div>
     )
 }

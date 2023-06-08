@@ -1,8 +1,19 @@
-input, button, select {
-    display: block;
-    margin: 10px;
+
+.Add {
+    margin-left: 1%;
 }
 
-.title {
-    text-decoration: underline;
+.add_btn {
+    margin: 0 10px 10px 0;
+    width: 15%;
 }
+
+.list_btn {
+    width: 15%;
+}
+
+.mb-3 {
+    width: 30%;
+}
+
+
